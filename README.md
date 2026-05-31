@@ -85,7 +85,7 @@ src
 ├── main
 │   ├── java
 │   │   └── com
-│   │       └── tourist
+│   │       └── an
 │   │           ├── controller
 │   │           ├── service
 │   │           ├── repository
