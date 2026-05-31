@@ -1,442 +1,281 @@
-# Tourist Management System
+# 🌍 Tourist Management System
 
-## Overview
+A robust Spring Boot REST API application for managing tourist information. The project demonstrates real-world backend development concepts such as RESTful APIs, layered architecture, exception handling, validation, and cloud deployment.
 
-Tourist Management System is a RESTful Spring Boot application developed to manage tourist information. The application provides APIs for creating, retrieving, updating, deleting, and filtering tourist records.
+## 🚀 Live Demo
 
-The project follows a layered architecture using Controller, Service, Repository, Entity, VO (Value Object), and Exception Handling components to ensure maintainability and scalability.
+🔗 https://springboot-tourist.onrender.com/app/tourist
 
 ---
 
-# Technology Stack
+## 📖 Introduction
 
-## Backend
-- Java
+The Tourist Management System is a backend application built using Spring Boot that allows users to perform CRUD (Create, Read, Update, Delete) operations on tourist records.
+
+This project is ideal for learning:
+
 - Spring Boot
-- Spring MVC
-- Spring Data JPA
-- Hibernate
-
-## Database
-- Oracle Database
-
-## Build Tool
-- Maven
-
-## API Testing
-- Postman
-
-## Development Environment
-- Eclipse / Spring Tool Suite (STS)
-- IntelliJ IDEA
+- REST API Development
+- Layered Architecture
+- Exception Handling
+- Validation
+- Maven Build System
+- Cloud Deployment
 
 ---
 
-# Project Architecture
+## ✨ Features
+
+### Tourist Management
+- Add new tourists
+- View all tourists
+- Search tourist by ID
+- Update tourist details
+- Delete tourist records
+
+### REST API Features
+- RESTful endpoint design
+- JSON request/response support
+- Proper HTTP status codes
+- Clean URL structure
+
+### Exception Handling
+- Custom exceptions
+- Global exception handler
+- User-friendly error responses
+
+### Validation
+- Request validation
+- Input verification
+- Error handling for invalid data
+
+### Architecture
+- Controller Layer
+- Service Layer
+- Repository Layer
+- Entity Layer
+
+### Deployment
+- Maven Build Support
+- Render Cloud Deployment
+- Production Ready Configuration
+
+---
+
+## 🛠️ Technology Stack
+
+| Technology | Purpose |
+|------------|----------|
+| Java 21 | Programming Language |
+| Spring Boot | Backend Framework |
+| Spring MVC | REST APIs |
+| Spring Data JPA | Database Operations |
+| Maven | Dependency Management |
+| REST API | Communication Layer |
+| Git | Version Control |
+| GitHub | Source Code Hosting |
+| Render | Cloud Deployment |
+
+---
+
+## 📂 Project Structure
 
 ```text
-Controller Layer
-       ↓
-Service Layer
-       ↓
-Repository Layer
-       ↓
-Oracle Database
+src
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── tourist
+│   │           ├── controller
+│   │           ├── service
+│   │           ├── repository
+│   │           ├── entity
+│   │           ├── exception
+│   │           └── TouristApplication.java
+│   │
+│   └── resources
+│       ├── application.properties
+│       └── static
+│
+└── test
 ```
 
-### Controller Layer
-Handles HTTP requests and responses.
-
-### Service Layer
-Contains business logic, validation, and data transformation.
-
-### Repository Layer
-Handles database operations using Spring Data JPA.
-
-### Exception Layer
-Handles application-specific exceptions and error messages.
-
 ---
 
-# Features
-
-- Add New Tourist
-- Get Tourist By ID
-- Get All Tourists
-- Filter Tourists Using Query Parameters
-- Update Tourist Details
-- Delete Tourist Records
-- Custom Exception Handling
-- RESTful API Design
-
----
-
-# Base URL
+## 🏗️ Architecture
 
 ```text
-http://localhost:8080/app/tourist
+Client
+   │
+   ▼
+Controller
+   │
+   ▼
+Service
+   │
+   ▼
+Repository
+   │
+   ▼
+Database
 ```
 
 ---
 
-# API Endpoints
+## 🔥 API Endpoints
 
-## 1. Get All Tourists
-
-Retrieve all tourists or filter tourists using optional parameters.
-
-### Endpoint
+### Get All Tourists
 
 ```http
 GET /app/tourist
 ```
 
-### Query Parameters
-
-| Parameter | Required | Description |
-|------------|----------|-------------|
-| name | No | Tourist Name |
-| addr | No | Tourist Address |
-| fromLoc | No | Source Location |
-| toLoc | No | Destination Location |
-
-### Examples
-
-Get All Tourists
+### Get Tourist By ID
 
 ```http
-GET http://localhost:8080/app/tourist
+GET /app/tourist/{id}
 ```
 
-Filter By Name
+Example:
 
 ```http
-GET http://localhost:8080/app/tourist?name=Anshu
+GET /app/tourist/1
 ```
 
-Filter By Multiple Fields
+### Add Tourist
 
 ```http
-GET http://localhost:8080/app/tourist?name=Anshu&addr=Hyderabad
+POST /app/tourist
 ```
 
-### Success Response
-
-```http
-200 OK
-```
-
----
-
-## 2. Get Tourist By ID
-
-Retrieve a specific tourist using the tourist ID.
-
-### Endpoint
-
-```http
-GET /app/tourist/get/{id}
-```
-
-### Example
-
-```http
-GET http://localhost:8080/app/tourist/get/1
-```
-
-### Success Response
-
-```http
-200 OK
-```
-
-### Error Response
-
-```http
-400 Bad Request
-```
-
-```text
-Tourist not found
-```
-
----
-
-## 3. Add Tourist
-
-Register a new tourist.
-
-### Endpoint
-
-```http
-POST /app/tourist/add
-```
-
-### Request Body
-
-```json
-{
-  "name": "Anshu",
-  "addr": "Hyderabad",
-  "fromLoc": "Patna",
-  "toLoc": "Goa"
-}
-```
-
-### Success Response
-
-```http
-200 OK
-```
-
-```text
-Tourist registered successfully
-```
-
-### Error Response
-
-```http
-400 Bad Request
-```
-
-```text
-Name is required
-```
-
----
-
-## 4. Update Tourist
-
-Update tourist information by ID.
-
-### Endpoint
-
-```http
-PATCH /app/tourist/update/{id}
-```
-
-### Example
-
-```http
-PATCH http://localhost:8080/app/tourist/update/1
-```
-
-### Request Body
+Request Body:
 
 ```json
 {
   "name": "Anshu Kumar",
-  "addr": "Hyderabad",
-  "fromLoc": "Patna",
-  "toLoc": "Delhi"
+  "country": "India",
+  "budget": 50000
 }
 ```
 
-### Success Response
+### Update Tourist
 
 ```http
-200 OK
+PUT /app/tourist/{id}
 ```
 
-```text
-Tourist updated successfully
+Request Body:
+
+```json
+{
+  "name": "Anshu Kumar Gupta",
+  "country": "India",
+  "budget": 70000
+}
 ```
 
-### Error Response
+### Delete Tourist
 
 ```http
-400 Bad Request
-```
-
-```text
-Tourist not found
+DELETE /app/tourist/{id}
 ```
 
 ---
 
-## 5. Delete Tourist
+## 📦 Build Project
 
-Delete a tourist record using ID.
-
-### Endpoint
-
-```http
-DELETE /app/tourist/delete/{id}
-```
-
-### Example
-
-```http
-DELETE http://localhost:8080/app/tourist/delete/1
-```
-
-### Success Response
-
-```http
-200 OK
-```
-
-```text
-Tourist deleted successfully
-```
-
-### Error Response
-
-```http
-400 Bad Request
-```
-
-```text
-Tourist not found
-```
-
----
-
-# Exception Handling
-
-## MissingDataException
-
-Thrown when required data is not provided during tourist registration.
-
-### Example
-
-```text
-Name is required
-```
-
----
-
-## TouristNotFoundException
-
-Thrown when a tourist record cannot be found for a specified ID.
-
-### Example
-
-```text
-Tourist with given ID not found
-```
-
----
-
-# HTTP Status Codes Used
-
-| Status Code | Description |
-|-------------|-------------|
-| 200 OK | Request completed successfully |
-| 400 Bad Request | Invalid request, missing data, or tourist not found |
-
----
-
-# Sample Project Structure
-
-```text
-src
-└── main
-    └── java
-        └── com.an
-            ├── rest
-            │   └── TouristController.java
-            │
-            ├── svs
-            │   ├── ITourtstService.java
-            │   └── TouristServiceImpl.java
-            │
-            ├── repo
-            │   └── TouristRepository.java
-            │
-            ├── entity
-            │   └── Tourist.java
-            │
-            ├── vo
-            │   └── Vo_Tourist.java
-            │
-            ├── exceptions
-            │   ├── MissingDataException.java
-            │   └── TouristNotFoundException.java
-            │
-            └── TouristManagementApplication.java
-```
-
----
-
-# How to Run the Application
-
-## Clone Repository
+Clean project:
 
 ```bash
-git clone <repository-url>
+mvn clean
 ```
 
-## Navigate to Project Directory
+Compile project:
 
 ```bash
-cd TouristManagementSystem
+mvn compile
 ```
 
-## Configure Database
+Package application:
 
-Update the following properties in:
-
-```properties
-src/main/resources/application.properties
+```bash
+mvn package
 ```
 
-```properties
-spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
-spring.datasource.username=your_username
-spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=update
+Build without tests:
+
+```bash
+mvn clean package -DskipTests
 ```
 
-## Run Application
+---
 
-Using Maven:
+## ▶️ Run Locally
+
+### Using Maven
 
 ```bash
 mvn spring-boot:run
 ```
 
-Or
+### Using WAR File
 
 ```bash
-mvn clean install
-java -jar target/project-name.jar
+java -jar target/*.war
 ```
 
----
-
-# Testing APIs
-
-Use:
-
-- Postman
-- Thunder Client
-- Swagger (Future Enhancement)
-
-Example URL:
+Application URL:
 
 ```text
-http://localhost:8080/app/tourist
+http://localhost:8080
 ```
 
 ---
 
-# Future Enhancements
+## ☁️ Deployment
 
-- Global Exception Handling using @ControllerAdvice
-- Swagger/OpenAPI Documentation
-- Pagination and Sorting
-- Authentication & Authorization
-- JWT Security
-- Docker Support
-- Unit Testing
-- Integration Testing
-- Logging Framework Integration
+The application is deployed on Render.
+
+Production URL:
+
+```text
+https://springboot-tourist.onrender.com/app/tourist
+```
 
 ---
 
-# Author
+## 🎯 Learning Concepts Covered
 
-Anshu Kumar
+- Spring Boot Fundamentals
+- Dependency Injection (IoC)
+- REST API Development
+- Request Mapping
+- ResponseEntity
+- Exception Handling
+- Validation
+- Layered Architecture
+- Maven Build Lifecycle
+- Cloud Deployment
+- Git & GitHub Workflow
 
-Java Developer | Spring Boot Developer
+---
+
+## 👨‍💻 Author
+
+**Anshu Kumar Gupta**
+
+- Java Full Stack Developer
+- Spring Boot Developer
+- Oracle Developer
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a star ⭐ on GitHub.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
